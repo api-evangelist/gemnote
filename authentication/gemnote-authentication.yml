@@ -1,0 +1,17 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/gemnote-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: AuthorizationToken
+  type: apiKey
+  in: header
+  parameter: AUTHORIZATION
+  description: A token issued by your Gemnote account manager. Sandbox tokens begin with `t_`
+    and production tokens begin with `p_`.
+  sources:
+  - openapi/gemnote-openapi.yml
