@@ -1,0 +1,151 @@
+openapi: 3.0.3
+info:
+  title: Gemnote Gifts API
+  version: v1
+  description: The Gemnote API lets partners send custom gifts and greeting cards programmatically and track their shipments. Responses follow a JSON:API-style envelope (data / type / attributes / relationships, with links + meta for pagination). Authentication is a token issued by your Gemnote account manager, passed in the AUTHORIZATION header. A sandbox environment (https://sandbox.gemnote.com/) mirrors production for safe testing; sandbox tokens begin with `t_` and production tokens begin with `p_`.
+  contact:
+    name: Gemnote
+    url: https://www.gemnote.com/
+  x-provenance:
+    generated: '2026-07-19'
+    method: generated
+    source: https://github.com/gemnote/api (README.md, gift.md, greeting_card.md, shipment.md)
+servers:
+- url: https://api.gemnote.com
+  description: Production
+- url: https://sandbox.gemnote.com
+  description: Sandbox
+security:
+- AuthorizationToken: []
+tags:
+- name: Gifts
+  description: The catalog of gifts available to send.
+paths:
+  /api/v1/gifts/:
+    get:
+      operationId: listGifts
+      summary: List all gifts
+      description: Retrieves a paginated collection of gifts available to send.
+      tags:
+      - Gifts
+      parameters:
+      - $ref: '#/components/parameters/PageNumber'
+      - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: A paginated collection of gifts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/v1/gifts/{gift_id}:
+    get:
+      operationId: getGift
+      summary: Retrieve a single gift
+      description: Retrieves a single gift by its identifier.
+      tags:
+      - Gifts
+      parameters:
+      - name: gift_id
+        in: path
+        required: true
+        description: The identifier of the gift.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The requested gift.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    PageSize:
+      name: page[size]
+      in: query
+      required: false
+      description: The number of items to return per page.
+      schema:
+        type: integer
+        minimum: 1
+    PageNumber:
+      name: page[number]
+      in: query
+      required: false
+      description: The 1-based page number to retrieve.
+      schema:
+        type: integer
+        minimum: 1
+  responses:
+    NotFound:
+      description: The requested resource does not exist.
+    Unauthorized:
+      description: The AUTHORIZATION token is missing or invalid.
+  schemas:
+    GiftListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Gift'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PaginationMeta:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
+    PaginationLinks:
+      type: object
+      properties:
+        self:
+          type: string
+          nullable: true
+        first:
+          type: string
+          nullable: true
+        prev:
+          type: string
+          nullable: true
+        next:
+          type: string
+          nullable: true
+        last:
+          type: string
+          nullable: true
+    GiftResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Gift'
+    Gift:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          example: gifts
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+  securitySchemes:
+    AuthorizationToken:
+      type: apiKey
+      in: header
+      name: AUTHORIZATION
+      description: A token issued by your Gemnote account manager. Sandbox tokens begin with `t_` and production tokens begin with `p_`.
