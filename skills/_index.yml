@@ -1,0 +1,8 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/gemnote-openapi.yml
+skills:
+  - file: gemnote-send-a-gift.md
+    name: Send a gift with Gemnote
+    api: openapi/gemnote-openapi.yml
+    operations: [listGifts, listGreetingCards, createShipment, getShipment]

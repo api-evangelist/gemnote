@@ -1,0 +1,18 @@
+{
+  "provider": "gemnote",
+  "sources": [
+    "gemnote-gifts-api-openapi.yml",
+    "gemnote-greeting-cards-api-openapi.yml",
+    "gemnote-shipments-api-openapi.yml"
+  ],
+  "outputs": [
+    "gemnote-gifts-api-openapi.yml",
+    "gemnote-greeting-cards-api-openapi.yml",
+    "gemnote-shipments-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,457 @@
+openapi: 3.0.3
+info:
+  title: Gemnote API
+  version: v1
+  description: >-
+    The Gemnote API lets partners send custom gifts and greeting cards
+    programmatically and track their shipments. Responses follow a JSON:API-style
+    envelope (data / type / attributes / relationships, with links + meta for
+    pagination). Authentication is a token issued by your Gemnote account manager,
+    passed in the AUTHORIZATION header. A sandbox environment
+    (https://sandbox.gemnote.com/) mirrors production for safe testing; sandbox
+    tokens begin with `t_` and production tokens begin with `p_`.
+  contact:
+    name: Gemnote
+    url: https://www.gemnote.com/
+  x-provenance:
+    generated: '2026-07-19'
+    method: generated
+    source: https://github.com/gemnote/api (README.md, gift.md, greeting_card.md, shipment.md)
+servers:
+  - url: https://api.gemnote.com
+    description: Production
+  - url: https://sandbox.gemnote.com
+    description: Sandbox
+security:
+  - AuthorizationToken: []
+tags:
+  - name: Gifts
+    description: The catalog of gifts available to send.
+  - name: Greeting Cards
+    description: The catalog of greeting cards / postcards available to include.
+  - name: Shipments
+    description: Orders that send a gift and optional greeting card to a recipient.
+paths:
+  /api/v1/gifts/:
+    get:
+      operationId: listGifts
+      summary: List all gifts
+      description: Retrieves a paginated collection of gifts available to send.
+      tags: [Gifts]
+      parameters:
+        - $ref: '#/components/parameters/PageNumber'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: A paginated collection of gifts.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/v1/gifts/{gift_id}:
+    get:
+      operationId: getGift
+      summary: Retrieve a single gift
+      description: Retrieves a single gift by its identifier.
+      tags: [Gifts]
+      parameters:
+        - name: gift_id
+          in: path
+          required: true
+          description: The identifier of the gift.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested gift.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GiftResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/greeting_cards/:
+    get:
+      operationId: listGreetingCards
+      summary: List all greeting cards
+      description: Retrieves a paginated collection of greeting cards.
+      tags: [Greeting Cards]
+      parameters:
+        - $ref: '#/components/parameters/PageNumber'
+        - $ref: '#/components/parameters/PageSize'
+      responses:
+        '200':
+          description: A paginated collection of greeting cards.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GreetingCardListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /api/v1/greeting_cards/{greeting_card_id}:
+    get:
+      operationId: getGreetingCard
+      summary: Retrieve a single greeting card
+      description: Retrieves a single greeting card by its identifier.
+      tags: [Greeting Cards]
+      parameters:
+        - name: greeting_card_id
+          in: path
+          required: true
+          description: The identifier of the greeting card.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The requested greeting card.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GreetingCardResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /api/v1/shipments/:
+    get:
+      operationId: listShipments
+      summary: List all shipments
+      description: Retrieves a paginated collection of shipments, optionally sideloading the related gift and postcard.
+      tags: [Shipments]
+      parameters:
+        - $ref: '#/components/parameters/PageNumber'
+        - $ref: '#/components/parameters/PageSize'
+        - $ref: '#/components/parameters/Include'
+      responses:
+        '200':
+          description: A paginated collection of shipments.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createShipment
+      summary: Create a shipment
+      description: Creates a shipment that sends a gift (and optional greeting card) to a recipient.
+      tags: [Shipments]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShipmentCreateRequest'
+      responses:
+        '200':
+          description: The created shipment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /api/v1/shipments/{shipment_id}:
+    get:
+      operationId: getShipment
+      summary: Retrieve a single shipment
+      description: Retrieves a single shipment by its identifier, optionally sideloading the related gift and postcard.
+      tags: [Shipments]
+      parameters:
+        - name: shipment_id
+          in: path
+          required: true
+          description: The identifier of the shipment.
+          schema:
+            type: string
+        - $ref: '#/components/parameters/Include'
+      responses:
+        '200':
+          description: The requested shipment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShipmentResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    AuthorizationToken:
+      type: apiKey
+      in: header
+      name: AUTHORIZATION
+      description: >-
+        A token issued by your Gemnote account manager. Sandbox tokens begin with
+        `t_` and production tokens begin with `p_`.
+  parameters:
+    PageNumber:
+      name: page[number]
+      in: query
+      required: false
+      description: The 1-based page number to retrieve.
+      schema:
+        type: integer
+        minimum: 1
+    PageSize:
+      name: page[size]
+      in: query
+      required: false
+      description: The number of items to return per page.
+      schema:
+        type: integer
+        minimum: 1
+    Include:
+      name: include
+      in: query
+      required: false
+      description: Comma-separated list of related resources to sideload. Supported values are `gift` and `postcard`.
+      schema:
+        type: string
+        example: gift,postcard
+  responses:
+    Unauthorized:
+      description: The AUTHORIZATION token is missing or invalid.
+    NotFound:
+      description: The requested resource does not exist.
+    UnprocessableEntity:
+      description: The request body failed validation (a required field is missing or invalid).
+  schemas:
+    Gift:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          example: gifts
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+    GiftResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Gift'
+    GiftListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Gift'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    GreetingCard:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          example: greeting_cards
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
+    GreetingCardResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GreetingCard'
+    GreetingCardListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GreetingCard'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    ShipmentAttributes:
+      type: object
+      properties:
+        companyId:
+          type: integer
+        giftId:
+          type: integer
+        greetingCardId:
+          type: integer
+        postcardId:
+          type: integer
+        qty:
+          type: integer
+        recipientName:
+          type: string
+        recipientCompany:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        addressOne:
+          type: string
+        addressTwo:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipcode:
+          type: string
+        country:
+          type: string
+        fromName:
+          type: string
+        fromEmail:
+          type: string
+        message:
+          type: string
+        messageLanguage:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        stage:
+          type: string
+          description: Fulfillment stage of the shipment.
+          example: pending
+        errorReason:
+          type: string
+          nullable: true
+    Shipment:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          example: shipments
+        attributes:
+          $ref: '#/components/schemas/ShipmentAttributes'
+        relationships:
+          type: object
+          properties:
+            gift:
+              $ref: '#/components/schemas/RelationshipRef'
+            greetingCard:
+              $ref: '#/components/schemas/RelationshipRef'
+            postcard:
+              $ref: '#/components/schemas/RelationshipRef'
+    ShipmentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Shipment'
+        included:
+          type: array
+          items:
+            type: object
+    ShipmentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shipment'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    ShipmentCreateRequest:
+      type: object
+      required: [data]
+      properties:
+        data:
+          type: object
+          required: [attributes]
+          properties:
+            attributes:
+              type: object
+              required: [giftId, qty, recipientName, email, addressOne, city, country]
+              properties:
+                giftId:
+                  type: integer
+                postcardId:
+                  type: integer
+                greetingCardId:
+                  type: integer
+                qty:
+                  type: integer
+                recipientName:
+                  type: string
+                recipientCompany:
+                  type: string
+                phone:
+                  type: string
+                email:
+                  type: string
+                addressOne:
+                  type: string
+                addressTwo:
+                  type: string
+                city:
+                  type: string
+                state:
+                  type: string
+                zipcode:
+                  type: string
+                country:
+                  type: string
+                fromName:
+                  type: string
+                fromEmail:
+                  type: string
+                message:
+                  type: string
+                messageLanguage:
+                  type: string
+    RelationshipRef:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
+    PaginationLinks:
+      type: object
+      properties:
+        self:
+          type: string
+          nullable: true
+        first:
+          type: string
+          nullable: true
+        prev:
+          type: string
+          nullable: true
+        next:
+          type: string
+          nullable: true
+        last:
+          type: string
+          nullable: true
+    PaginationMeta:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer

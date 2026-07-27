@@ -1,0 +1,21 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/gemnote/api/blob/master/README.md
+summary: >-
+  Gemnote provides a dedicated sandbox environment that mirrors production for safe
+  testing. Data changes made on the sandbox server do not affect production data.
+environments:
+  - name: production
+    base_url: https://api.gemnote.com/
+    token_prefix: p_
+  - name: sandbox
+    base_url: https://sandbox.gemnote.com/
+    token_prefix: t_
+    isolation: Data changes on the sandbox server do not affect production data.
+credentials:
+  mechanism: AUTHORIZATION header token
+  issuance: Tokens are issued by your Gemnote account manager (not self-serve).
+  note: >-
+    Token prefix identifies the environment — sandbox tokens begin with `t_`,
+    production tokens begin with `p_`. No public test tokens or magic test values
+    are published in the documentation.

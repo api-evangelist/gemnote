@@ -1,0 +1,32 @@
+# Gemnote
+
+> Gemnote is a corporate gifting and swag management platform that designs, produces, warehouses, and ships custom branded merchandise worldwide. It publishes a JSON:API-style REST API for listing gifts and greeting cards, creating shipments to recipients, and tracking fulfillment, with a sandbox environment for testing. Authentication is a token issued by a Gemnote account manager, passed in the AUTHORIZATION header.
+
+## APIs
+
+- [Gemnote API (docs)](https://github.com/gemnote/api): List gifts and greeting cards, create shipments, track fulfillment.
+- Production base URL: https://api.gemnote.com/
+- Sandbox base URL: https://sandbox.gemnote.com/
+
+## Specs
+
+- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/gemnote/refs/heads/main/openapi/gemnote-openapi.yml): OpenAPI 3.0 description of the Gemnote API (7 operations).
+
+## Operations
+
+- listGifts — GET /api/v1/gifts/
+- getGift — GET /api/v1/gifts/{gift_id}
+- listGreetingCards — GET /api/v1/greeting_cards/
+- getGreetingCard — GET /api/v1/greeting_cards/{greeting_card_id}
+- listShipments — GET /api/v1/shipments/
+- getShipment — GET /api/v1/shipments/{shipment_id}
+- createShipment — POST /api/v1/shipments/
+
+## Docs
+
+- [Product site](https://www.gemnote.com/)
+- [Blog](https://www.gemnote.com/blog)
+- [Pricing](https://www.gemnote.com/pricing)
+- [Support / Help Center](https://support.gemnote.com/hc/en-us)
+- [GitHub organization](https://github.com/gemnote)
+- [Terms of Service](https://www.gemnote.com/terms)

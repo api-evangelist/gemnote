@@ -1,0 +1,24 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Gemnote API
+  version: 1.0.0
+extends: openapi/gemnote-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-19'
+      x-api-style: json-api
+      x-auth-style: api-key-header
+  - target: $.info
+    update:
+      x-agentic-access: agentic-access/gemnote-agentic-access.yml
+      x-conventions: conventions/gemnote-conventions.yml
+      x-data-model: data-model/gemnote-data-model.yml
+  - target: $.tags
+    update:
+      - name: Gifts
+        description: The catalog of gifts available to send.
+      - name: Greeting Cards
+        description: The catalog of greeting cards / postcards available to include.
+      - name: Shipments
+        description: Orders that send a gift and optional greeting card to a recipient.

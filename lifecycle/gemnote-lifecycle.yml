@@ -1,0 +1,19 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/gemnote-openapi.yml, https://github.com/gemnote/api
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://github.com/gemnote/api
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No deprecation policy or RFC 8594 Sunset/Deprecation header support is documented.
+sla:
+  url: null
+status_page: null
+deprecated_operations: []
+note: >-
+  Gemnote does not publish a status page, SLA, or formal deprecation policy. The API
+  is served from api.gemnote.com (production) and sandbox.gemnote.com (sandbox), both
+  live over TLS 1.3 with HSTS. Versioning is expressed in the URI path (/api/v1/).

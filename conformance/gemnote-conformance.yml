@@ -1,0 +1,26 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/gemnote-openapi.yml, https://github.com/gemnote/api
+standards:
+  - id: json-api
+    conforms: partial
+    evidence: >-
+      Responses use the JSON:API data/type/attributes/relationships envelope with
+      top-level links + meta and an `included` sideload array, but the API does not
+      advertise the application/vnd.api+json media type or full JSON:API compliance.
+  - id: pagination
+    conforms: true
+    evidence: page[number]/page[size] params with links.{first,prev,next,last} + meta.totalPages/totalItems.
+  - id: oauth2
+    conforms: false
+    evidence: Authentication is a static apiKey token in the AUTHORIZATION header, not OAuth2.
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: No application/problem+json responses documented.
+  - id: idempotency
+    conforms: false
+    evidence: No idempotency-key mechanism documented.
+  - id: rfc8594-sunset
+    conforms: false

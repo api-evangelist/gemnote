@@ -1,0 +1,37 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/gemnote-openapi.yml
+format: http-status
+note: >-
+  The Gemnote documentation does not publish an RFC 9457 problem-details error
+  registry; errors are conveyed via HTTP status codes. Shipment fulfillment failures
+  are additionally surfaced on the resource itself via the `stage` and nullable
+  `errorReason` attributes. The entries below are derived from the documented
+  operations.
+problems:
+  - status: 401
+    title: Unauthorized
+    detail: The AUTHORIZATION token is missing or invalid.
+    source_operations:
+      - openapi/gemnote-openapi.yml#listGifts
+      - openapi/gemnote-openapi.yml#createShipment
+  - status: 404
+    title: Not Found
+    detail: The requested resource (gift, greeting card, or shipment) does not exist.
+    source_operations:
+      - openapi/gemnote-openapi.yml#getGift
+      - openapi/gemnote-openapi.yml#getShipment
+  - status: 422
+    title: Unprocessable Entity
+    detail: >-
+      A required shipment field is missing or invalid (giftId, qty, recipientName,
+      email, addressOne, city, country).
+    source_operations:
+      - openapi/gemnote-openapi.yml#createShipment
+resource_error_signal:
+  field: errorReason
+  on: shipments
+  companion_field: stage
+  description: >-
+    Nullable string on a shipment describing why fulfillment failed; `stage` reflects
+    the fulfillment state (e.g. pending, accepted).

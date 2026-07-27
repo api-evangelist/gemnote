@@ -1,0 +1,44 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/gemnote-openapi.yml, https://github.com/gemnote/api
+summary: >-
+  Cross-cutting request/response semantics for the Gemnote API, derived from the
+  OpenAPI and the published documentation. The API follows a JSON:API-style envelope.
+authentication:
+  style: api-key
+  location: header
+  parameter: AUTHORIZATION
+  cross_ref: authentication/gemnote-authentication.yml
+envelope:
+  style: json-api
+  single: '{ "data": { "id", "type", "attributes", "relationships" } }'
+  collection: '{ "data": [ ... ], "links": { ... }, "meta": { ... } }'
+  sideloading: Included related resources are returned in a top-level `included` array.
+pagination:
+  style: page-based
+  params:
+    - name: page[number]
+      description: 1-based page number.
+    - name: page[size]
+      description: Items per page.
+  response_fields:
+    links: [self, first, prev, next, last]
+    meta: [totalPages, totalItems]
+field_expansion:
+  param: include
+  values: [gift, postcard]
+  description: Comma-separated related resources to sideload on shipment reads.
+idempotency:
+  supported: false
+  note: No idempotency-key header or mechanism is documented for this API.
+versioning:
+  scheme: uri-path
+  current: v1
+  cross_ref: lifecycle/gemnote-lifecycle.yml
+error_envelope:
+  note: >-
+    Errors are surfaced via HTTP status codes (401/404/422). Shipment resources also
+    carry a `stage` and nullable `errorReason` attribute reflecting fulfillment state.
+  cross_ref: errors/gemnote-problem-types.yml
+rate_limiting:
+  documented: false

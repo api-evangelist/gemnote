@@ -1,7 +1,29 @@
 aid: gemnote
 name: Gemnote
-description: Gemnote is a company surfaced as a portfolio company of y-combinator and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Gemnote is a corporate gifting and swag management platform that helps businesses
+  design, produce, warehouse, and ship custom branded merchandise and gifts worldwide.
+  Founded in 2014 and based in Union City, California, and backed by Y Combinator,
+  Gemnote pairs a swag management app (inventory, order tracking, e-commerce swag
+  stores, and Shopify integration) with human design and fulfillment expertise, and
+  is used by companies such as Reddit, Google, Airbnb, and Sephora for employee swag,
+  new-hire kits, PR and influencer kits, event giveaways, and packaging. Gemnote also
+  publishes a JSON:API-style REST API that lets partners list gifts and greeting cards,
+  create shipments to recipients, and track fulfillment programmatically, with a
+  sandbox environment for testing.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.gemnote.com/favicon.ico
 url: https://raw.githubusercontent.com/api-evangelist/gemnote/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,12 +33,133 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-apis: []
+- Corporate Gifting
+- Swag Management
+- Branded Merchandise
+- Fulfillment
+- E-commerce
+- Shipping
+- Y Combinator
+apis:
+- aid: gemnote:gemnote-gifts-api
+  name: Gemnote Gifts API
+  description: The catalog of gifts available to send.
+  humanURL: https://github.com/gemnote/api
+  baseURL: https://api.gemnote.com
+  tags:
+  - Gifts
+  properties:
+  - type: OpenAPI
+    url: openapi/gemnote-gifts-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/gemnote/api
+  - type: Authentication
+    url: authentication/gemnote-authentication.yml
+  - type: Sandbox
+    url: sandbox/gemnote-sandbox.yml
+  - type: Conventions
+    url: conventions/gemnote-conventions.yml
+  - type: ErrorCatalog
+    url: errors/gemnote-problem-types.yml
+  - type: DataModel
+    url: data-model/gemnote-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/gemnote-lifecycle.yml
+  - type: Conformance
+    url: conformance/gemnote-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/gemnote-agentic-access.yml
+- aid: gemnote:gemnote-greeting-cards-api
+  name: Gemnote Greeting Cards API
+  description: The catalog of greeting cards / postcards available to include.
+  humanURL: https://github.com/gemnote/api
+  baseURL: https://api.gemnote.com
+  tags:
+  - Greeting Cards
+  properties:
+  - type: OpenAPI
+    url: openapi/gemnote-greeting-cards-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/gemnote/api
+  - type: Authentication
+    url: authentication/gemnote-authentication.yml
+  - type: Sandbox
+    url: sandbox/gemnote-sandbox.yml
+  - type: Conventions
+    url: conventions/gemnote-conventions.yml
+  - type: ErrorCatalog
+    url: errors/gemnote-problem-types.yml
+  - type: DataModel
+    url: data-model/gemnote-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/gemnote-lifecycle.yml
+  - type: Conformance
+    url: conformance/gemnote-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/gemnote-agentic-access.yml
+- aid: gemnote:gemnote-shipments-api
+  name: Gemnote Shipments API
+  description: Orders that send a gift and optional greeting card to a recipient.
+  humanURL: https://github.com/gemnote/api
+  baseURL: https://api.gemnote.com
+  tags:
+  - Shipments
+  properties:
+  - type: OpenAPI
+    url: openapi/gemnote-shipments-api-openapi.yml
+  - type: Documentation
+    url: https://github.com/gemnote/api
+  - type: Authentication
+    url: authentication/gemnote-authentication.yml
+  - type: Sandbox
+    url: sandbox/gemnote-sandbox.yml
+  - type: Conventions
+    url: conventions/gemnote-conventions.yml
+  - type: ErrorCatalog
+    url: errors/gemnote-problem-types.yml
+  - type: DataModel
+    url: data-model/gemnote-data-model.yml
+  - type: Lifecycle
+    url: lifecycle/gemnote-lifecycle.yml
+  - type: Conformance
+    url: conformance/gemnote-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/gemnote-agentic-access.yml
+common:
+- type: Website
+  url: https://www.gemnote.com/
+- type: DeveloperPortal
+  url: https://github.com/gemnote/api
+- type: Documentation
+  url: https://github.com/gemnote/api
+- type: APIReference
+  url: https://github.com/gemnote/api
+- type: GitHubOrganization
+  url: https://github.com/gemnote
+- type: Blog
+  url: https://www.gemnote.com/blog
+- type: Pricing
+  url: https://www.gemnote.com/pricing
+- type: TermsOfService
+  url: https://www.gemnote.com/terms
+- type: Support
+  url: https://support.gemnote.com/hc/en-us
+- type: LLMsTxt
+  url: llms/gemnote-llms.txt
+- type: WellKnown
+  url: well-known/gemnote-well-known.yml
+- type: DomainSecurity
+  url: security/gemnote-domain-security.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

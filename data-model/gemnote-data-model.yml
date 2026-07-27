@@ -1,0 +1,55 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/gemnote-openapi.yml
+summary: >-
+  Entity-relationship graph derived from the Gemnote OpenAPI relationships and
+  id-reference fields. A shipment is the central order entity that references a gift
+  and an optional greeting card / postcard.
+entities:
+  - name: gift
+    type: gifts
+    id: string
+    attributes: [name]
+  - name: greeting_card
+    type: greeting_cards
+    id: string
+    attributes: [name]
+    note: >-
+      Referred to as `postcards` in shipment relationships and `include=postcard`.
+  - name: shipment
+    type: shipments
+    id: string
+    attributes:
+      - companyId
+      - giftId
+      - greetingCardId
+      - postcardId
+      - qty
+      - recipientName
+      - recipientCompany
+      - phone
+      - email
+      - addressOne
+      - addressTwo
+      - city
+      - state
+      - zipcode
+      - country
+      - fromName
+      - fromEmail
+      - message
+      - messageLanguage
+      - createdAt
+      - stage
+      - errorReason
+relationships:
+  - from: shipment
+    to: gift
+    kind: belongs_to
+    via: giftId
+    required: true
+  - from: shipment
+    to: greeting_card
+    kind: belongs_to
+    via: greetingCardId
+    required: false
