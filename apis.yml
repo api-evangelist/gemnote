@@ -129,6 +129,12 @@ apis:
   - type: AgenticAccess
     url: agentic-access/gemnote-agentic-access.yml
 common:
+- type: AgentSkill
+  url: skills/gemnote-send-a-gift.md
+- type: MCPServer
+  url: mcp/gemnote-mcp.yml
+- type: Overlay
+  url: overlays/gemnote-openapi-overlay.yaml
 - type: Website
   url: https://www.gemnote.com/
 - type: DeveloperPortal
