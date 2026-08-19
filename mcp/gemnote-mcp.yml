@@ -2,31 +2,36 @@ generated: '2026-07-19'
 method: derived
 status: candidate
 source: openapi/gemnote-openapi.yml
-note: >-
-  No official hosted Gemnote MCP server was found. The tools below are a candidate
-  surface derived one-to-one from the documented OpenAPI operations.
+note: No official hosted Gemnote MCP server was found. The tools below are a candidate surface derived
+  one-to-one from the documented OpenAPI operations.
 server:
   name: gemnote
   transport: http
 tools:
-  - name: list_gifts
-    description: List all gifts available to send.
-    source_operation: openapi/gemnote-openapi.yml#listGifts
-  - name: get_gift
-    description: Retrieve a single gift by id.
-    source_operation: openapi/gemnote-openapi.yml#getGift
-  - name: list_greeting_cards
-    description: List all greeting cards.
-    source_operation: openapi/gemnote-openapi.yml#listGreetingCards
-  - name: get_greeting_card
-    description: Retrieve a single greeting card by id.
-    source_operation: openapi/gemnote-openapi.yml#getGreetingCard
-  - name: list_shipments
-    description: List all shipments, optionally sideloading gift and postcard.
-    source_operation: openapi/gemnote-openapi.yml#listShipments
-  - name: get_shipment
-    description: Retrieve a single shipment by id.
-    source_operation: openapi/gemnote-openapi.yml#getShipment
-  - name: create_shipment
-    description: Create a shipment that sends a gift (and optional greeting card) to a recipient.
-    source_operation: openapi/gemnote-openapi.yml#createShipment
+- name: list_gifts
+  description: List all gifts available to send.
+  source_operation: openapi/gemnote-openapi.yml#listGifts
+- name: get_gift
+  description: Retrieve a single gift by id.
+  source_operation: openapi/gemnote-openapi.yml#getGift
+- name: list_greeting_cards
+  description: List all greeting cards.
+  source_operation: openapi/gemnote-openapi.yml#listGreetingCards
+- name: get_greeting_card
+  description: Retrieve a single greeting card by id.
+  source_operation: openapi/gemnote-openapi.yml#getGreetingCard
+- name: list_shipments
+  description: List all shipments, optionally sideloading gift and postcard.
+  source_operation: openapi/gemnote-openapi.yml#listShipments
+- name: get_shipment
+  description: Retrieve a single shipment by id.
+  source_operation: openapi/gemnote-openapi.yml#getShipment
+- name: create_shipment
+  description: Create a shipment that sends a gift (and optional greeting card) to a recipient.
+  source_operation: openapi/gemnote-openapi.yml#createShipment
+deployment:
+  mode: none
+  verified: derived
+  tools: 7
+  checked: '2026-08-12'
+  source: catalog MCP census

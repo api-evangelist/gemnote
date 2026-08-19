@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gemnote Gifts API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AUTHORIZATION",
+      "value": "{{AUTHORIZATION}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Gifts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all gifts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gemnote.com/api/v1/gifts/",
+            "params": [
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "The 1-based page number to retrieve."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return per page."
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated collection of gifts available to send."
+        },
+        {
+          "info": {
+            "name": "Retrieve a single gift",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gemnote.com/api/v1/gifts/:gift_id",
+            "params": [
+              {
+                "name": "gift_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the gift."
+              }
+            ]
+          },
+          "docs": "Retrieves a single gift by its identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

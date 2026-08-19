@@ -1,0 +1,647 @@
+{
+  "item": [
+    {
+      "id": "9bbb24a8-45a4-4188-a255-c5c6f9d3c63f",
+      "name": "Shipments",
+      "description": {
+        "content": "Orders that send a gift and optional greeting card to a recipient.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "44c7f67a-e740-4f8a-9f70-0277e0c0e694",
+          "name": "List all shipments",
+          "request": {
+            "name": "List all shipments",
+            "description": {
+              "content": "Retrieves a paginated collection of shipments, optionally sideloading the related gift and postcard.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page[number]",
+                  "value": "<integer>",
+                  "description": "The 1-based page number to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "page[size]",
+                  "value": "<integer>",
+                  "description": "The number of items to return per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-separated list of related resources to sideload. Supported values are `gift` and `postcard`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "550cbf97-cd3a-422f-b240-c13d70737154",
+              "name": "A paginated collection of shipments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "gift,postcard"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "AUTHORIZATION",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"shipments\",\n      \"attributes\": {\n        \"companyId\": 6992,\n        \"giftId\": 4592,\n        \"greetingCardId\": 550,\n        \"postcardId\": 5830,\n        \"qty\": 6546,\n        \"recipientName\": \"string\",\n        \"recipientCompany\": \"string\",\n        \"phone\": \"string\",\n        \"email\": \"string\",\n        \"addressOne\": \"string\",\n        \"addressTwo\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zipcode\": \"string\",\n        \"country\": \"string\",\n        \"fromName\": \"string\",\n        \"fromEmail\": \"string\",\n        \"message\": \"string\",\n        \"messageLanguage\": \"string\",\n        \"createdAt\": \"1990-05-18T12:54:44.576Z\",\n        \"stage\": \"pending\",\n        \"errorReason\": \"string\"\n      },\n      \"relationships\": {\n        \"gift\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"greetingCard\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"postcard\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        }\n      }\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"shipments\",\n      \"attributes\": {\n        \"companyId\": 7385,\n        \"giftId\": 6273,\n        \"greetingCardId\": 3084,\n        \"postcardId\": 1882,\n        \"qty\": 8941,\n        \"recipientName\": \"string\",\n        \"recipientCompany\": \"string\",\n        \"phone\": \"string\",\n        \"email\": \"string\",\n        \"addressOne\": \"string\",\n        \"addressTwo\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"zipcode\": \"string\",\n        \"country\": \"string\",\n        \"fromName\": \"string\",\n        \"fromEmail\": \"string\",\n        \"message\": \"string\",\n        \"messageLanguage\": \"string\",\n        \"createdAt\": \"2008-09-20T00:17:19.014Z\",\n        \"stage\": \"pending\",\n        \"errorReason\": \"string\"\n      },\n      \"relationships\": {\n        \"gift\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"greetingCard\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        },\n        \"postcard\": {\n          \"data\": {\n            \"id\": \"string\",\n            \"type\": \"string\"\n          }\n        }\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"string\",\n    \"first\": \"string\",\n    \"prev\": \"string\",\n    \"next\": \"string\",\n    \"last\": \"string\"\n  },\n  \"meta\": {\n    \"totalPages\": 4612,\n    \"totalItems\": 9867\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "314896f0-7f5c-400f-9b99-3c5229ea923a",
+              "name": "The AUTHORIZATION token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page[number]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page[size]",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "include",
+                      "value": "gift,postcard"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "AUTHORIZATION",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "578804e3-dcb4-45af-ab06-8099fdfe6f02",
+          "name": "Create a shipment",
+          "request": {
+            "name": "Create a shipment",
+            "description": {
+              "content": "Creates a shipment that sends a gift (and optional greeting card) to a recipient.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"giftId\": \"<integer>\",\n      \"qty\": \"<integer>\",\n      \"recipientName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"addressOne\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"postcardId\": \"<integer>\",\n      \"greetingCardId\": \"<integer>\",\n      \"recipientCompany\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"addressTwo\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipcode\": \"<string>\",\n      \"fromName\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"message\": \"<string>\",\n      \"messageLanguage\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "950d9443-6d38-45d6-bac0-cb2457cafca4",
+              "name": "The created shipment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "AUTHORIZATION",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"giftId\": \"<integer>\",\n      \"qty\": \"<integer>\",\n      \"recipientName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"addressOne\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"postcardId\": \"<integer>\",\n      \"greetingCardId\": \"<integer>\",\n      \"recipientCompany\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"addressTwo\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipcode\": \"<string>\",\n      \"fromName\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"message\": \"<string>\",\n      \"messageLanguage\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"type\": \"shipments\",\n    \"attributes\": {\n      \"companyId\": 6096,\n      \"giftId\": 7210,\n      \"greetingCardId\": 1123,\n      \"postcardId\": 2269,\n      \"qty\": 1701,\n      \"recipientName\": \"string\",\n      \"recipientCompany\": \"string\",\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"addressOne\": \"string\",\n      \"addressTwo\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zipcode\": \"string\",\n      \"country\": \"string\",\n      \"fromName\": \"string\",\n      \"fromEmail\": \"string\",\n      \"message\": \"string\",\n      \"messageLanguage\": \"string\",\n      \"createdAt\": \"1995-04-13T05:48:03.624Z\",\n      \"stage\": \"pending\",\n      \"errorReason\": \"string\"\n    },\n    \"relationships\": {\n      \"gift\": {\n        \"data\": {\n          \"id\": \"string\",\n          \"type\": \"string\"\n        }\n      },\n      \"greetingCard\": {\n        \"data\": {\n          \"id\": \"string\",\n          \"type\": \"string\"\n        }\n      },\n      \"postcard\": {\n        \"data\": {\n          \"id\": \"string\",\n          \"type\": \"string\"\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bbcc149-8b37-4654-b9bb-0dcbcdbae585",
+              "name": "The AUTHORIZATION token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "AUTHORIZATION",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"giftId\": \"<integer>\",\n      \"qty\": \"<integer>\",\n      \"recipientName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"addressOne\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"postcardId\": \"<integer>\",\n      \"greetingCardId\": \"<integer>\",\n      \"recipientCompany\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"addressTwo\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipcode\": \"<string>\",\n      \"fromName\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"message\": \"<string>\",\n      \"messageLanguage\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d647949a-dc86-4f9f-b668-a29b756c9873",
+              "name": "The request body failed validation (a required field is missing or invalid).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "AUTHORIZATION",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"data\": {\n    \"attributes\": {\n      \"giftId\": \"<integer>\",\n      \"qty\": \"<integer>\",\n      \"recipientName\": \"<string>\",\n      \"email\": \"<string>\",\n      \"addressOne\": \"<string>\",\n      \"city\": \"<string>\",\n      \"country\": \"<string>\",\n      \"postcardId\": \"<integer>\",\n      \"greetingCardId\": \"<integer>\",\n      \"recipientCompany\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"addressTwo\": \"<string>\",\n      \"state\": \"<string>\",\n      \"zipcode\": \"<string>\",\n      \"fromName\": \"<string>\",\n      \"fromEmail\": \"<string>\",\n      \"message\": \"<string>\",\n      \"messageLanguage\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce32bd0e-8dfd-4222-9ed0-d6100beea571",
+          "name": "Retrieve a single shipment",
+          "request": {
+            "name": "Retrieve a single shipment",
+            "description": {
+              "content": "Retrieves a single shipment by its identifier, optionally sideloading the related gift and postcard.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                ":shipment_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-separated list of related resources to sideload. Supported values are `gift` and `postcard`."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "shipment_id",
+                  "description": "(Required) The identifier of the shipment."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44499140-0dde-4a22-91e0-41ae0b1d4fd6",
+              "name": "The requested shipment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ":shipment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "gift,postcard"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "shipment_id",
+                      "description": "(Required) The identifier of the shipment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "AUTHORIZATION",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"type\": \"shipments\",\n    \"attributes\": {\n      \"companyId\": 1993,\n      \"giftId\": 628,\n      \"greetingCardId\": 8768,\n      \"postcardId\": 7383,\n      \"qty\": 5131,\n      \"recipientName\": \"string\",\n      \"recipientCompany\": \"string\",\n      \"phone\": \"string\",\n      \"email\": \"string\",\n      \"addressOne\": \"string\",\n      \"addressTwo\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"zipcode\": \"string\",\n      \"country\": \"string\",\n      \"fromName\": \"string\",\n      \"fromEmail\": \"string\",\n      \"message\": \"string\",\n      \"messageLanguage\": \"string\",\n      \"createdAt\": \"1965-04-13T03:26:29.581Z\",\n      \"stage\": \"pending\",\n      \"errorReason\": \"string\"\n    },\n    \"relationships\": {\n      \"gift\": {\n        \"data\": {\n          \"id\": \"string\",\n          \"type\": \"string\"\n        }\n      },\n      \"greetingCard\": {\n        \"data\": {\n          \"id\": \"string\",\n          \"type\": \"string\"\n        }\n      },\n      \"postcard\": {\n        \"data\": {\n          \"id\": \"string\",\n          \"type\": \"string\"\n        }\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ffa95825-b4ad-46ef-9717-9ce90c94ad73",
+              "name": "The AUTHORIZATION token is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ":shipment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "gift,postcard"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "shipment_id",
+                      "description": "(Required) The identifier of the shipment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "AUTHORIZATION",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "05308672-af39-4d95-b21d-829d0b49595c",
+              "name": "The requested resource does not exist.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ":shipment_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "gift,postcard"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "shipment_id",
+                      "description": "(Required) The identifier of the shipment."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "AUTHORIZATION",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.gemnote.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "AUTHORIZATION"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "da8573a6-21bc-428a-bd37-0b5684bd63c3",
+    "name": "Gemnote Gifts Shipments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Gemnote API lets partners send custom gifts and greeting cards programmatically and track their shipments. Responses follow a JSON:API-style envelope (data / type / attributes / relationships, with links + meta for pagination). Authentication is a token issued by your Gemnote account manager, passed in the AUTHORIZATION header. A sandbox environment (https://sandbox.gemnote.com/) mirrors production for safe testing; sandbox tokens begin with `t_` and production tokens begin with `p_`.\n\nContact Support:\n Name: Gemnote",
+      "type": "text/plain"
+    }
+  }
+}

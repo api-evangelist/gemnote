@@ -1,0 +1,70 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gemnote Gifts Greeting Cards API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AUTHORIZATION",
+      "value": "{{AUTHORIZATION}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Greeting Cards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all greeting cards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gemnote.com/api/v1/greeting_cards/",
+            "params": [
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "The 1-based page number to retrieve."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return per page."
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated collection of greeting cards."
+        },
+        {
+          "info": {
+            "name": "Retrieve a single greeting card",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gemnote.com/api/v1/greeting_cards/:greeting_card_id",
+            "params": [
+              {
+                "name": "greeting_card_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the greeting card."
+              }
+            ]
+          },
+          "docs": "Retrieves a single greeting card by its identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

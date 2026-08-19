@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Gemnote Gifts Shipments API",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "AUTHORIZATION",
+      "value": "{{AUTHORIZATION}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shipments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all shipments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gemnote.com/api/v1/shipments/",
+            "params": [
+              {
+                "name": "page[number]",
+                "value": "",
+                "type": "query",
+                "description": "The 1-based page number to retrieve."
+              },
+              {
+                "name": "page[size]",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to return per page."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of related resources to sideload. Supported values are `gift` and `postcard`."
+              }
+            ]
+          },
+          "docs": "Retrieves a paginated collection of shipments, optionally sideloading the related gift and postcard."
+        },
+        {
+          "info": {
+            "name": "Create a shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.gemnote.com/api/v1/shipments/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a shipment that sends a gift (and optional greeting card) to a recipient."
+        },
+        {
+          "info": {
+            "name": "Retrieve a single shipment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.gemnote.com/api/v1/shipments/:shipment_id",
+            "params": [
+              {
+                "name": "shipment_id",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the shipment."
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of related resources to sideload. Supported values are `gift` and `postcard`."
+              }
+            ]
+          },
+          "docs": "Retrieves a single shipment by its identifier, optionally sideloading the related gift and postcard."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
