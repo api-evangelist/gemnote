@@ -1,9 +1,7 @@
 {
   "provider": "gemnote",
   "sources": [
-    "gemnote-gifts-api-openapi.yml",
-    "gemnote-greeting-cards-api-openapi.yml",
-    "gemnote-shipments-api-openapi.yml"
+    "_original/gemnote-openapi.yml"
   ],
   "outputs": [
     "gemnote-gifts-api-openapi.yml",
@@ -13,6 +11,14 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "gemnote-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "gemnote-gifts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gemnote-greeting-cards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "gemnote-shipments-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

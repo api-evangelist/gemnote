@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Gemnote Gifts Shipments API
+  title: Gemnote Shipments API
   version: v1
   description: The Gemnote API lets partners send custom gifts and greeting cards programmatically and track their shipments. Responses follow a JSON:API-style envelope (data / type / attributes / relationships, with links + meta for pagination). Authentication is a token issued by your Gemnote account manager, passed in the AUTHORIZATION header. A sandbox environment (https://sandbox.gemnote.com/) mirrors production for safe testing; sandbox tokens begin with `t_` and production tokens begin with `p_`.
   contact:
@@ -91,51 +91,47 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    PageSize:
-      name: page[size]
-      in: query
-      required: false
-      description: The number of items to return per page.
-      schema:
-        type: integer
-        minimum: 1
-    PageNumber:
-      name: page[number]
-      in: query
-      required: false
-      description: The 1-based page number to retrieve.
-      schema:
-        type: integer
-        minimum: 1
-    Include:
-      name: include
-      in: query
-      required: false
-      description: Comma-separated list of related resources to sideload. Supported values are `gift` and `postcard`.
-      schema:
-        type: string
-        example: gift,postcard
   schemas:
-    Shipment:
+    RelationshipRef:
       type: object
       properties:
-        id:
-          type: string
-        type:
-          type: string
-          example: shipments
-        attributes:
-          $ref: '#/components/schemas/ShipmentAttributes'
-        relationships:
+        data:
           type: object
           properties:
-            gift:
-              $ref: '#/components/schemas/RelationshipRef'
-            greetingCard:
-              $ref: '#/components/schemas/RelationshipRef'
-            postcard:
-              $ref: '#/components/schemas/RelationshipRef'
+            id:
+              type: string
+            type:
+              type: string
+    PaginationLinks:
+      type: object
+      properties:
+        self:
+          type:
+          - string
+          - 'null'
+        first:
+          type:
+          - string
+          - 'null'
+        prev:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
+        last:
+          type:
+          - string
+          - 'null'
+    PaginationMeta:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
     ShipmentCreateRequest:
       type: object
       required:
@@ -242,8 +238,18 @@ components:
           description: Fulfillment stage of the shipment.
           example: pending
         errorReason:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
+    ShipmentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Shipment'
+        included:
+          type: array
+          items:
+            type: object
     ShipmentListResponse:
       type: object
       properties:
@@ -255,50 +261,25 @@ components:
           $ref: '#/components/schemas/PaginationLinks'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
-    RelationshipRef:
+    Shipment:
       type: object
       properties:
-        data:
+        id:
+          type: string
+        type:
+          type: string
+          example: shipments
+        attributes:
+          $ref: '#/components/schemas/ShipmentAttributes'
+        relationships:
           type: object
           properties:
-            id:
-              type: string
-            type:
-              type: string
-    PaginationMeta:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-        totalItems:
-          type: integer
-    PaginationLinks:
-      type: object
-      properties:
-        self:
-          type: string
-          nullable: true
-        first:
-          type: string
-          nullable: true
-        prev:
-          type: string
-          nullable: true
-        next:
-          type: string
-          nullable: true
-        last:
-          type: string
-          nullable: true
-    ShipmentResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Shipment'
-        included:
-          type: array
-          items:
-            type: object
+            gift:
+              $ref: '#/components/schemas/RelationshipRef'
+            greetingCard:
+              $ref: '#/components/schemas/RelationshipRef'
+            postcard:
+              $ref: '#/components/schemas/RelationshipRef'
   responses:
     NotFound:
       description: The requested resource does not exist.
@@ -306,6 +287,31 @@ components:
       description: The AUTHORIZATION token is missing or invalid.
     UnprocessableEntity:
       description: The request body failed validation (a required field is missing or invalid).
+  parameters:
+    Include:
+      name: include
+      in: query
+      required: false
+      description: Comma-separated list of related resources to sideload. Supported values are `gift` and `postcard`.
+      schema:
+        type: string
+        example: gift,postcard
+    PageNumber:
+      name: page[number]
+      in: query
+      required: false
+      description: The 1-based page number to retrieve.
+      schema:
+        type: integer
+        minimum: 1
+    PageSize:
+      name: page[size]
+      in: query
+      required: false
+      description: The number of items to return per page.
+      schema:
+        type: integer
+        minimum: 1
   securitySchemes:
     AuthorizationToken:
       type: apiKey

@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Gemnote Gifts Greeting Cards API
+  title: Gemnote Greeting Cards API
   version: v1
   description: The Gemnote API lets partners send custom gifts and greeting cards programmatically and track their shipments. Responses follow a JSON:API-style envelope (data / type / attributes / relationships, with links + meta for pagination). Authentication is a token issued by your Gemnote account manager, passed in the AUTHORIZATION header. A sandbox environment (https://sandbox.gemnote.com/) mirrors production for safe testing; sandbox tokens begin with `t_` and production tokens begin with `p_`.
   contact:
@@ -66,24 +66,47 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    PageSize:
-      name: page[size]
-      in: query
-      required: false
-      description: The number of items to return per page.
-      schema:
-        type: integer
-        minimum: 1
-    PageNumber:
-      name: page[number]
-      in: query
-      required: false
-      description: The 1-based page number to retrieve.
-      schema:
-        type: integer
-        minimum: 1
+  responses:
+    NotFound:
+      description: The requested resource does not exist.
+    Unauthorized:
+      description: The AUTHORIZATION token is missing or invalid.
   schemas:
+    PaginationLinks:
+      type: object
+      properties:
+        self:
+          type:
+          - string
+          - 'null'
+        first:
+          type:
+          - string
+          - 'null'
+        prev:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
+        last:
+          type:
+          - string
+          - 'null'
+    PaginationMeta:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
+    GreetingCardResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GreetingCard'
     GreetingCardListResponse:
       type: object
       properties:
@@ -108,41 +131,23 @@ components:
           properties:
             name:
               type: string
-    GreetingCardResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/GreetingCard'
-    PaginationMeta:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-        totalItems:
-          type: integer
-    PaginationLinks:
-      type: object
-      properties:
-        self:
-          type: string
-          nullable: true
-        first:
-          type: string
-          nullable: true
-        prev:
-          type: string
-          nullable: true
-        next:
-          type: string
-          nullable: true
-        last:
-          type: string
-          nullable: true
-  responses:
-    NotFound:
-      description: The requested resource does not exist.
-    Unauthorized:
-      description: The AUTHORIZATION token is missing or invalid.
+  parameters:
+    PageNumber:
+      name: page[number]
+      in: query
+      required: false
+      description: The 1-based page number to retrieve.
+      schema:
+        type: integer
+        minimum: 1
+    PageSize:
+      name: page[size]
+      in: query
+      required: false
+      description: The number of items to return per page.
+      schema:
+        type: integer
+        minimum: 1
   securitySchemes:
     AuthorizationToken:
       type: apiKey
