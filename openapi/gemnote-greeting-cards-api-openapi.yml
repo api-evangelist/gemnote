@@ -66,12 +66,30 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource does not exist.
-    Unauthorized:
-      description: The AUTHORIZATION token is missing or invalid.
   schemas:
+    GreetingCardListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GreetingCard'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PaginationMeta:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
+    GreetingCardResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GreetingCard'
     PaginationLinks:
       type: object
       properties:
@@ -95,29 +113,6 @@ components:
           type:
           - string
           - 'null'
-    PaginationMeta:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-        totalItems:
-          type: integer
-    GreetingCardResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/GreetingCard'
-    GreetingCardListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/GreetingCard'
-        links:
-          $ref: '#/components/schemas/PaginationLinks'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     GreetingCard:
       type: object
       properties:
@@ -148,6 +143,11 @@ components:
       schema:
         type: integer
         minimum: 1
+  responses:
+    NotFound:
+      description: The requested resource does not exist.
+    Unauthorized:
+      description: The AUTHORIZATION token is missing or invalid.
   securitySchemes:
     AuthorizationToken:
       type: apiKey

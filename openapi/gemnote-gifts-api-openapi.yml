@@ -66,12 +66,19 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource does not exist.
-    Unauthorized:
-      description: The AUTHORIZATION token is missing or invalid.
   schemas:
+    PaginationMeta:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
+    GiftResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Gift'
     PaginationLinks:
       type: object
       properties:
@@ -95,13 +102,6 @@ components:
           type:
           - string
           - 'null'
-    PaginationMeta:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-        totalItems:
-          type: integer
     GiftListResponse:
       type: object
       properties:
@@ -126,11 +126,11 @@ components:
           properties:
             name:
               type: string
-    GiftResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Gift'
+  responses:
+    NotFound:
+      description: The requested resource does not exist.
+    Unauthorized:
+      description: The AUTHORIZATION token is missing or invalid.
   parameters:
     PageNumber:
       name: page[number]

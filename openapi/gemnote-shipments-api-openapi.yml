@@ -92,16 +92,32 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    RelationshipRef:
+    Shipment:
       type: object
       properties:
-        data:
+        id:
+          type: string
+        type:
+          type: string
+          example: shipments
+        attributes:
+          $ref: '#/components/schemas/ShipmentAttributes'
+        relationships:
           type: object
           properties:
-            id:
-              type: string
-            type:
-              type: string
+            gift:
+              $ref: '#/components/schemas/RelationshipRef'
+            greetingCard:
+              $ref: '#/components/schemas/RelationshipRef'
+            postcard:
+              $ref: '#/components/schemas/RelationshipRef'
+    PaginationMeta:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
     PaginationLinks:
       type: object
       properties:
@@ -125,13 +141,6 @@ components:
           type:
           - string
           - 'null'
-    PaginationMeta:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-        totalItems:
-          type: integer
     ShipmentCreateRequest:
       type: object
       required:
@@ -241,15 +250,6 @@ components:
           type:
           - string
           - 'null'
-    ShipmentResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Shipment'
-        included:
-          type: array
-          items:
-            type: object
     ShipmentListResponse:
       type: object
       properties:
@@ -261,32 +261,32 @@ components:
           $ref: '#/components/schemas/PaginationLinks'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
-    Shipment:
+    RelationshipRef:
       type: object
       properties:
-        id:
-          type: string
-        type:
-          type: string
-          example: shipments
-        attributes:
-          $ref: '#/components/schemas/ShipmentAttributes'
-        relationships:
+        data:
           type: object
           properties:
-            gift:
-              $ref: '#/components/schemas/RelationshipRef'
-            greetingCard:
-              $ref: '#/components/schemas/RelationshipRef'
-            postcard:
-              $ref: '#/components/schemas/RelationshipRef'
+            id:
+              type: string
+            type:
+              type: string
+    ShipmentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Shipment'
+        included:
+          type: array
+          items:
+            type: object
   responses:
+    UnprocessableEntity:
+      description: The request body failed validation (a required field is missing or invalid).
     NotFound:
       description: The requested resource does not exist.
     Unauthorized:
       description: The AUTHORIZATION token is missing or invalid.
-    UnprocessableEntity:
-      description: The request body failed validation (a required field is missing or invalid).
   parameters:
     Include:
       name: include
