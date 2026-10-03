@@ -67,6 +67,18 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    GreetingCardResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GreetingCard'
+    PaginationMeta:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
     GreetingCardListResponse:
       type: object
       properties:
@@ -78,18 +90,6 @@ components:
           $ref: '#/components/schemas/PaginationLinks'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
-    PaginationMeta:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-        totalItems:
-          type: integer
-    GreetingCardResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/GreetingCard'
     PaginationLinks:
       type: object
       properties:
@@ -126,15 +126,12 @@ components:
           properties:
             name:
               type: string
+  responses:
+    NotFound:
+      description: The requested resource does not exist.
+    Unauthorized:
+      description: The AUTHORIZATION token is missing or invalid.
   parameters:
-    PageNumber:
-      name: page[number]
-      in: query
-      required: false
-      description: The 1-based page number to retrieve.
-      schema:
-        type: integer
-        minimum: 1
     PageSize:
       name: page[size]
       in: query
@@ -143,11 +140,14 @@ components:
       schema:
         type: integer
         minimum: 1
-  responses:
-    NotFound:
-      description: The requested resource does not exist.
-    Unauthorized:
-      description: The AUTHORIZATION token is missing or invalid.
+    PageNumber:
+      name: page[number]
+      in: query
+      required: false
+      description: The 1-based page number to retrieve.
+      schema:
+        type: integer
+        minimum: 1
   securitySchemes:
     AuthorizationToken:
       type: apiKey
