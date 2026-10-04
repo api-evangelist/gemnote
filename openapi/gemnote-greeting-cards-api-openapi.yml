@@ -66,12 +66,29 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    PageNumber:
+      name: page[number]
+      in: query
+      required: false
+      description: The 1-based page number to retrieve.
+      schema:
+        type: integer
+        minimum: 1
+    PageSize:
+      name: page[size]
+      in: query
+      required: false
+      description: The number of items to return per page.
+      schema:
+        type: integer
+        minimum: 1
+  responses:
+    NotFound:
+      description: The requested resource does not exist.
+    Unauthorized:
+      description: The AUTHORIZATION token is missing or invalid.
   schemas:
-    GreetingCardResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/GreetingCard'
     PaginationMeta:
       type: object
       properties:
@@ -79,17 +96,24 @@ components:
           type: integer
         totalItems:
           type: integer
-    GreetingCardListResponse:
+    GreetingCardResponse:
       type: object
       properties:
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/GreetingCard'
-        links:
-          $ref: '#/components/schemas/PaginationLinks'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
+          $ref: '#/components/schemas/GreetingCard'
+    GreetingCard:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          example: greeting_cards
+        attributes:
+          type: object
+          properties:
+            name:
+              type: string
     PaginationLinks:
       type: object
       properties:
@@ -113,41 +137,17 @@ components:
           type:
           - string
           - 'null'
-    GreetingCard:
+    GreetingCardListResponse:
       type: object
       properties:
-        id:
-          type: string
-        type:
-          type: string
-          example: greeting_cards
-        attributes:
-          type: object
-          properties:
-            name:
-              type: string
-  responses:
-    NotFound:
-      description: The requested resource does not exist.
-    Unauthorized:
-      description: The AUTHORIZATION token is missing or invalid.
-  parameters:
-    PageSize:
-      name: page[size]
-      in: query
-      required: false
-      description: The number of items to return per page.
-      schema:
-        type: integer
-        minimum: 1
-    PageNumber:
-      name: page[number]
-      in: query
-      required: false
-      description: The 1-based page number to retrieve.
-      schema:
-        type: integer
-        minimum: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/GreetingCard'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
   securitySchemes:
     AuthorizationToken:
       type: apiKey

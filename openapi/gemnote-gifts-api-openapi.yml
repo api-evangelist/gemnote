@@ -67,13 +67,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    PaginationMeta:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-        totalItems:
-          type: integer
     Gift:
       type: object
       properties:
@@ -87,22 +80,18 @@ components:
           properties:
             name:
               type: string
+    PaginationMeta:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
     GiftResponse:
       type: object
       properties:
         data:
           $ref: '#/components/schemas/Gift'
-    GiftListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Gift'
-        links:
-          $ref: '#/components/schemas/PaginationLinks'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     PaginationLinks:
       type: object
       properties:
@@ -126,20 +115,18 @@ components:
           type:
           - string
           - 'null'
-  responses:
-    NotFound:
-      description: The requested resource does not exist.
-    Unauthorized:
-      description: The AUTHORIZATION token is missing or invalid.
+    GiftListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Gift'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
   parameters:
-    PageSize:
-      name: page[size]
-      in: query
-      required: false
-      description: The number of items to return per page.
-      schema:
-        type: integer
-        minimum: 1
     PageNumber:
       name: page[number]
       in: query
@@ -148,6 +135,19 @@ components:
       schema:
         type: integer
         minimum: 1
+    PageSize:
+      name: page[size]
+      in: query
+      required: false
+      description: The number of items to return per page.
+      schema:
+        type: integer
+        minimum: 1
+  responses:
+    NotFound:
+      description: The requested resource does not exist.
+    Unauthorized:
+      description: The AUTHORIZATION token is missing or invalid.
   securitySchemes:
     AuthorizationToken:
       type: apiKey

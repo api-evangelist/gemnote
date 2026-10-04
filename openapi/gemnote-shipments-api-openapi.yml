@@ -92,6 +92,93 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ShipmentAttributes:
+      type: object
+      properties:
+        companyId:
+          type: integer
+        giftId:
+          type: integer
+        greetingCardId:
+          type: integer
+        postcardId:
+          type: integer
+        qty:
+          type: integer
+        recipientName:
+          type: string
+        recipientCompany:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        addressOne:
+          type: string
+        addressTwo:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        zipcode:
+          type: string
+        country:
+          type: string
+        fromName:
+          type: string
+        fromEmail:
+          type: string
+        message:
+          type: string
+        messageLanguage:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        stage:
+          type: string
+          description: Fulfillment stage of the shipment.
+          example: pending
+        errorReason:
+          type:
+          - string
+          - 'null'
+    ShipmentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Shipment'
+        included:
+          type: array
+          items:
+            type: object
+    Shipment:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          example: shipments
+        attributes:
+          $ref: '#/components/schemas/ShipmentAttributes'
+        relationships:
+          type: object
+          properties:
+            gift:
+              $ref: '#/components/schemas/RelationshipRef'
+            greetingCard:
+              $ref: '#/components/schemas/RelationshipRef'
+            postcard:
+              $ref: '#/components/schemas/RelationshipRef'
+    PaginationMeta:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
     ShipmentCreateRequest:
       type: object
       required:
@@ -149,85 +236,6 @@ components:
                   type: string
                 messageLanguage:
                   type: string
-    PaginationMeta:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-        totalItems:
-          type: integer
-    ShipmentResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Shipment'
-        included:
-          type: array
-          items:
-            type: object
-    ShipmentListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Shipment'
-        links:
-          $ref: '#/components/schemas/PaginationLinks'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-    ShipmentAttributes:
-      type: object
-      properties:
-        companyId:
-          type: integer
-        giftId:
-          type: integer
-        greetingCardId:
-          type: integer
-        postcardId:
-          type: integer
-        qty:
-          type: integer
-        recipientName:
-          type: string
-        recipientCompany:
-          type: string
-        phone:
-          type: string
-        email:
-          type: string
-        addressOne:
-          type: string
-        addressTwo:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        zipcode:
-          type: string
-        country:
-          type: string
-        fromName:
-          type: string
-        fromEmail:
-          type: string
-        message:
-          type: string
-        messageLanguage:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-        stage:
-          type: string
-          description: Fulfillment stage of the shipment.
-          example: pending
-        errorReason:
-          type:
-          - string
-          - 'null'
     RelationshipRef:
       type: object
       properties:
@@ -261,38 +269,23 @@ components:
           type:
           - string
           - 'null'
-    Shipment:
+    ShipmentListResponse:
       type: object
       properties:
-        id:
-          type: string
-        type:
-          type: string
-          example: shipments
-        attributes:
-          $ref: '#/components/schemas/ShipmentAttributes'
-        relationships:
-          type: object
-          properties:
-            gift:
-              $ref: '#/components/schemas/RelationshipRef'
-            greetingCard:
-              $ref: '#/components/schemas/RelationshipRef'
-            postcard:
-              $ref: '#/components/schemas/RelationshipRef'
-  responses:
-    NotFound:
-      description: The requested resource does not exist.
-    UnprocessableEntity:
-      description: The request body failed validation (a required field is missing or invalid).
-    Unauthorized:
-      description: The AUTHORIZATION token is missing or invalid.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shipment'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
   parameters:
-    PageSize:
-      name: page[size]
+    PageNumber:
+      name: page[number]
       in: query
       required: false
-      description: The number of items to return per page.
+      description: The 1-based page number to retrieve.
       schema:
         type: integer
         minimum: 1
@@ -304,14 +297,21 @@ components:
       schema:
         type: string
         example: gift,postcard
-    PageNumber:
-      name: page[number]
+    PageSize:
+      name: page[size]
       in: query
       required: false
-      description: The 1-based page number to retrieve.
+      description: The number of items to return per page.
       schema:
         type: integer
         minimum: 1
+  responses:
+    NotFound:
+      description: The requested resource does not exist.
+    Unauthorized:
+      description: The AUTHORIZATION token is missing or invalid.
+    UnprocessableEntity:
+      description: The request body failed validation (a required field is missing or invalid).
   securitySchemes:
     AuthorizationToken:
       type: apiKey
