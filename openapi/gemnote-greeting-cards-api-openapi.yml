@@ -83,24 +83,7 @@ components:
       schema:
         type: integer
         minimum: 1
-  responses:
-    NotFound:
-      description: The requested resource does not exist.
-    Unauthorized:
-      description: The AUTHORIZATION token is missing or invalid.
   schemas:
-    PaginationMeta:
-      type: object
-      properties:
-        totalPages:
-          type: integer
-        totalItems:
-          type: integer
-    GreetingCardResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/GreetingCard'
     GreetingCard:
       type: object
       properties:
@@ -114,6 +97,13 @@ components:
           properties:
             name:
               type: string
+    PaginationMeta:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
     PaginationLinks:
       type: object
       properties:
@@ -148,6 +138,16 @@ components:
           $ref: '#/components/schemas/PaginationLinks'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
+    GreetingCardResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/GreetingCard'
+  responses:
+    NotFound:
+      description: The requested resource does not exist.
+    Unauthorized:
+      description: The AUTHORIZATION token is missing or invalid.
   securitySchemes:
     AuthorizationToken:
       type: apiKey

@@ -91,7 +91,50 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    PageNumber:
+      name: page[number]
+      in: query
+      required: false
+      description: The 1-based page number to retrieve.
+      schema:
+        type: integer
+        minimum: 1
+    PageSize:
+      name: page[size]
+      in: query
+      required: false
+      description: The number of items to return per page.
+      schema:
+        type: integer
+        minimum: 1
+    Include:
+      name: include
+      in: query
+      required: false
+      description: Comma-separated list of related resources to sideload. Supported values are `gift` and `postcard`.
+      schema:
+        type: string
+        example: gift,postcard
   schemas:
+    ShipmentListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Shipment'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PaginationMeta:
+      type: object
+      properties:
+        totalPages:
+          type: integer
+        totalItems:
+          type: integer
     ShipmentAttributes:
       type: object
       properties:
@@ -144,15 +187,6 @@ components:
           type:
           - string
           - 'null'
-    ShipmentResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Shipment'
-        included:
-          type: array
-          items:
-            type: object
     Shipment:
       type: object
       properties:
@@ -172,13 +206,48 @@ components:
               $ref: '#/components/schemas/RelationshipRef'
             postcard:
               $ref: '#/components/schemas/RelationshipRef'
-    PaginationMeta:
+    PaginationLinks:
       type: object
       properties:
-        totalPages:
-          type: integer
-        totalItems:
-          type: integer
+        self:
+          type:
+          - string
+          - 'null'
+        first:
+          type:
+          - string
+          - 'null'
+        prev:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
+        last:
+          type:
+          - string
+          - 'null'
+    ShipmentResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Shipment'
+        included:
+          type: array
+          items:
+            type: object
+    RelationshipRef:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            type:
+              type: string
     ShipmentCreateRequest:
       type: object
       required:
@@ -236,82 +305,13 @@ components:
                   type: string
                 messageLanguage:
                   type: string
-    RelationshipRef:
-      type: object
-      properties:
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-    PaginationLinks:
-      type: object
-      properties:
-        self:
-          type:
-          - string
-          - 'null'
-        first:
-          type:
-          - string
-          - 'null'
-        prev:
-          type:
-          - string
-          - 'null'
-        next:
-          type:
-          - string
-          - 'null'
-        last:
-          type:
-          - string
-          - 'null'
-    ShipmentListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Shipment'
-        links:
-          $ref: '#/components/schemas/PaginationLinks'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-  parameters:
-    PageNumber:
-      name: page[number]
-      in: query
-      required: false
-      description: The 1-based page number to retrieve.
-      schema:
-        type: integer
-        minimum: 1
-    Include:
-      name: include
-      in: query
-      required: false
-      description: Comma-separated list of related resources to sideload. Supported values are `gift` and `postcard`.
-      schema:
-        type: string
-        example: gift,postcard
-    PageSize:
-      name: page[size]
-      in: query
-      required: false
-      description: The number of items to return per page.
-      schema:
-        type: integer
-        minimum: 1
   responses:
     NotFound:
       description: The requested resource does not exist.
-    Unauthorized:
-      description: The AUTHORIZATION token is missing or invalid.
     UnprocessableEntity:
       description: The request body failed validation (a required field is missing or invalid).
+    Unauthorized:
+      description: The AUTHORIZATION token is missing or invalid.
   securitySchemes:
     AuthorizationToken:
       type: apiKey
