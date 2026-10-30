@@ -64,6 +64,119 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Gemnote is a company surfaced as a portfolio company of y-combinator and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Gemnote is a corporate gifting and swag management platform that helps businesses design, produce, warehouse, and ship custom branded merchandise and gifts worldwide. Founded in 2014 and based in Union City, California, and backed by Y Combinator, Gemnote pairs a swag management app (inventory, order tracking, e-commerce swag stores, and Shopify integration) with human design and fulfillment expertise, and is used by companies such as Reddit, Google, Airbnb, and Sephora for employee swag, new-hire kits, PR and influencer kits, event giveaways, and packaging. Gemnote also publishes a JSON:API-style REST API that lets partners list gifts and greeting cards, create shipments to recipients, and track fulfillment programmatically, with a sandbox environment for testing.
 
-Backed by: y-combinator
+**Areas:** Company · Corporate Gifting · Swag Management · Branded Merchandise · Fulfillment · E-Commerce · Shipping · Y Combinator
+
+## Gemnote on APIs.io
+
+Everything profiled for Gemnote is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/gemnote/](https://apis.io/providers/gemnote/)** — or go straight to one of the APIs or properties below.
+
+### APIs (3)
+
+- [Gemnote Gifts API](https://apis.io/apis/gemnote/gemnote-gifts-api/) — The catalog of gifts available to send.
+- [Gemnote Greeting Cards API](https://apis.io/apis/gemnote/gemnote-greeting-cards-api/) — The catalog of greeting cards / postcards available to include.
+- [Gemnote Shipments API](https://apis.io/apis/gemnote/gemnote-shipments-api/) — Orders that send a gift and optional greeting card to a recipient.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [gemnote](https://apis.io/servers/gemnote/gemnote/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Gemnote Agentic Access](https://apis.io/agentic-access/gemnote/gemnote-agentic-access/)
+
+#### Collections (3)
+
+Postman and Open Collection request collections.
+
+- [Gemnote Gifts API](https://apis.io/collections/gemnote/open-gemnote-gifts-api/)
+- [Gemnote Gifts Greeting Cards API](https://apis.io/collections/gemnote/open-gemnote-greeting-cards-api/)
+- [Gemnote Gifts Shipments API](https://apis.io/collections/gemnote/open-gemnote-shipments-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Gemnote Openapi Overlay](https://apis.io/overlays/gemnote/gemnote-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Gemnote Authentication](https://apis.io/security/gemnote/gemnote-authentication/)
+- [Gemnote Domain Security](https://apis.io/security/gemnote/gemnote-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.gemnote.com/)
+- [Documentation](https://github.com/gemnote/api)
+- [API reference](https://github.com/gemnote/api)
+- [Pricing](https://www.gemnote.com/pricing)
+- [Support](https://support.gemnote.com/hc/en-us)
+- [Blog](https://www.gemnote.com/blog)
+- [Terms of service](https://www.gemnote.com/terms)
+- [GitHub](https://github.com/gemnote)
+
+## API Evangelist rating
+
+**Kin Score 27.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 14.5 |
+| Contract governance | 4.5 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 54.2 |
+| Access clarity | 21.1 |
+
+**Agent readiness 18.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/gemnote/](https://apis.io/providers/gemnote/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Gemnote: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/gemnote/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
